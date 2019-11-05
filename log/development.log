@@ -2204,3 +2204,413 @@ Processing by WelcomeController#index as HTML
 Completed 200 OK in 31ms (Views: 30.0ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/users/sign_up" for ::1 at 2019-11-05 16:40:26 -0600
+Processing by RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 99ms (Views: 94.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/users" for ::1 at 2019-11-05 16:41:49 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Q5zy3EErWLSU1TFlTCzsDa2GVypoG1EIhu0yaYj21KEAjyfvICR4eNzPSuYz3SzTbO88aplYJybSDCD3PzJZJg==", "user"=>{"email"=>"jimothy@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "payment"=>{"card_expires_month"=>"6", "card_expires_year"=>"2024", "token"=>"tok_1FbaifKcq08y3n4bRdzzcbJS"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jimothy@example.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "confirmation_token", "confirmation_sent_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "jimothy@example.com"], ["encrypted_password", "$2a$11$dJTg1WT02L9RP3bUbc1W9O5H1kNPX.KEZ4HgVcN8cZ9TEEt.i5zA6"], ["confirmation_token", "-ttR5yXPyz3phBQkEpxp"], ["confirmation_sent_at", "2019-11-05 22:41:49.320166"], ["created_at", "2019-11-05 22:41:49.320048"], ["updated_at", "2019-11-05 22:41:49.320048"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 23], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "payments" ("email", "token", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "jimothy@example.com"], ["token", "tok_1FbaifKcq08y3n4bRdzzcbJS"], ["user_id", 23], ["created_at", "2019-11-05 22:41:50.624649"], ["updated_at", "2019-11-05 22:41:50.624649"]]
+Redirected to http://localhost:3001/
+  [1m[35m (5.5ms)[0m  [1m[36mcommit transaction[0m
+  Rendering /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb (0.3ms)
+Devise::Mailer#confirmation_instructions: processed outbound mail in 6.1ms
+Sent mail to jimothy@example.com (0.8ms)
+Date: Tue, 05 Nov 2019 16:41:50 -0600
+From: please-change-me-at-config-initializers-devise@example.com
+Reply-To: please-change-me-at-config-initializers-devise@example.com
+To: jimothy@example.com
+Message-ID: <5dc1faae9cb1a_5ba22b0a6505664050243@siren02.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome jimothy@example.com!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3001/users/confirmation?confirmation_token=-ttR5yXPyz3phBQkEpxp">Confirm my account</a></p>
+
+Completed 302 Found in 1420ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/" for ::1 at 2019-11-05 16:41:50 -0600
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 28ms (Views: 27.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation?confirmation_token=-ttR5yXPyz3phBQkEpxp" for ::1 at 2019-11-05 16:42:08 -0600
+Processing by Devise::ConfirmationsController#show as HTML
+  Parameters: {"confirmation_token"=>"-ttR5yXPyz3phBQkEpxp"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."confirmation_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["confirmation_token", "-ttR5yXPyz3phBQkEpxp"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "users" SET "confirmed_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["confirmed_at", "2019-11-05 22:42:08.814704"], ["updated_at", "2019-11-05 22:42:08.815068"], ["id", 23]]
+  [1m[35m (3.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3001/users/sign_in
+Completed 302 Found in 9ms (ActiveRecord: 3.7ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2019-11-05 16:42:08 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 44ms (Views: 43.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2019-11-05 16:42:13 -0600
+Processing by RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 27ms (Views: 26.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2019-11-05 16:42:37 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dr2hbAOBAppKAbKzBt8FBJZ1Q376JgpdIW/As7u3VfY1rnRfYo4iVgIbyTB5LsXaVxwoPgtlfHN1jtItDHPYcQ==", "user"=>{"email"=>"mashrur@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "payment"=>{"card_number"=>"4000056655665556", "card_cvv"=>"111", "card_expires_month"=>"6", "card_expires_year"=>"2023"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mashrur@example.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "confirmation_token", "confirmation_sent_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "mashrur@example.com"], ["encrypted_password", "$2a$11$omugTrMbFq3xoVG8xFBGJuhkoMm7y4VRfmPYYJvXQ/x47L0OnveCa"], ["confirmation_token", "jExiDzByxC3xF8jBTruH"], ["confirmation_sent_at", "2019-11-05 22:42:38.041929"], ["created_at", "2019-11-05 22:42:38.041869"], ["updated_at", "2019-11-05 22:42:38.041869"]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 24], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 24]]
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (3.0ms)
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+  Rendering /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb (0.6ms)
+Devise::Mailer#confirmation_instructions: processed outbound mail in 6.7ms
+Sent mail to mashrur@example.com (1.4ms)
+Date: Tue, 05 Nov 2019 16:42:38 -0600
+From: please-change-me-at-config-initializers-devise@example.com
+Reply-To: please-change-me-at-config-initializers-devise@example.com
+To: mashrur@example.com
+Message-ID: <5dc1fade9ae7e_5ba22b0a65056bb8503d3@siren02.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome mashrur@example.com!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3001/users/confirmation?confirmation_token=jExiDzByxC3xF8jBTruH">Confirm my account</a></p>
+
+Completed 200 OK in 691ms (Views: 28.1ms | ActiveRecord: 6.6ms)
+
+
+Started POST "/users" for ::1 at 2019-11-05 16:43:05 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lKp7Hi82jnW2t9aPWbAj/pB1An1tX492kEGWhJ6f7C+j9CCLhLGSH7OsqgR2oksOd/eQr7+OBdvMH7uEJJk1Yw==", "user"=>{"email"=>"mashrur@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "payment"=>{"card_expires_month"=>"6", "card_expires_year"=>"2022", "token"=>"tok_1FbajtKcq08y3n4bQq77sf4k"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mashrur@example.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "confirmation_token", "confirmation_sent_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "mashrur@example.com"], ["encrypted_password", "$2a$11$VHs5BNiX5NvyYyntDJL6geAECGaJafRcmtEYBcneOE0l4h2WkYqwe"], ["confirmation_token", "krKtWUR-v4yviYYDMT7E"], ["confirmation_sent_at", "2019-11-05 22:43:05.287926"], ["created_at", "2019-11-05 22:43:05.287876"], ["updated_at", "2019-11-05 22:43:05.287876"]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 25], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "payments" ("email", "token", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "mashrur@example.com"], ["token", "tok_1FbajtKcq08y3n4bQq77sf4k"], ["user_id", 25], ["created_at", "2019-11-05 22:43:06.508469"], ["updated_at", "2019-11-05 22:43:06.508469"]]
+Redirected to http://localhost:3001/
+  [1m[35m (5.2ms)[0m  [1m[36mcommit transaction[0m
+  Rendering /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb (0.5ms)
+Devise::Mailer#confirmation_instructions: processed outbound mail in 8.9ms
+Sent mail to mashrur@example.com (1.1ms)
+Date: Tue, 05 Nov 2019 16:43:06 -0600
+From: please-change-me-at-config-initializers-devise@example.com
+Reply-To: please-change-me-at-config-initializers-devise@example.com
+To: mashrur@example.com
+Message-ID: <5dc1fafa80c5b_5ba22b0a650566405048@siren02.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome mashrur@example.com!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3001/users/confirmation?confirmation_token=krKtWUR-v4yviYYDMT7E">Confirm my account</a></p>
+
+Completed 302 Found in 1341ms (ActiveRecord: 5.7ms)
+
+
+Started GET "/" for ::1 at 2019-11-05 16:43:06 -0600
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 38ms (Views: 37.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2019-11-05 16:45:55 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 485ms (Views: 467.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2019-11-05 16:45:59 -0600
+Processing by RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 27ms (Views: 26.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/images/favicon.ico" for ::1 at 2019-11-05 16:45:59 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/images/favicon.ico"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  Rendering /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.5ms)
+  Rendered collection of /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [19 times] (2.9ms)
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendering /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (12.4ms)
+Started POST "/users" for ::1 at 2019-11-05 16:46:42 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"MyiySLWPfgn1WsNRkgBnPrGCjTXoLO19ESipuUnSYiwEdundHghiY/BBv9q9Eg/OVgAf5zr9Z9BNdoS589S7YA==", "user"=>{"email"=>"janedoe@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "payment"=>{"card_expires_month"=>"5", "card_expires_year"=>"2024", "token"=>"tok_1FbanNKcq08y3n4b7hVOgRhq"}}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "janedoe@example.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "confirmation_token", "confirmation_sent_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "janedoe@example.com"], ["encrypted_password", "$2a$11$A0YsD7h2FNnDNIvUX6gt5ulxu..dxV3bc8nIJoxXw6oB0Zidl79Iu"], ["confirmation_token", "Wz2JyE4xPms8v7AKf5AD"], ["confirmation_sent_at", "2019-11-05 22:46:42.149844"], ["created_at", "2019-11-05 22:46:42.149683"], ["updated_at", "2019-11-05 22:46:42.149683"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 26], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "payments" ("email", "token", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "janedoe@example.com"], ["token", "tok_1FbanNKcq08y3n4b7hVOgRhq"], ["user_id", 26], ["created_at", "2019-11-05 22:46:43.520369"], ["updated_at", "2019-11-05 22:46:43.520369"]]
+Redirected to http://localhost:3001/
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  Rendering /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb (0.5ms)
+Devise::Mailer#confirmation_instructions: processed outbound mail in 113.5ms
+Sent mail to janedoe@example.com (5.0ms)
+Date: Tue, 05 Nov 2019 16:46:43 -0600
+From: please-change-me-at-config-initializers-devise@example.com
+Reply-To: please-change-me-at-config-initializers-devise@example.com
+To: janedoe@example.com
+Message-ID: <5dc1fbd3b2568_12782ac82045d89c9802c@siren02.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome janedoe@example.com!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3001/users/confirmation?confirmation_token=Wz2JyE4xPms8v7AKf5AD">Confirm my account</a></p>
+
+Completed 302 Found in 1691ms (ActiveRecord: 6.3ms)
+
+
+Started GET "/" for ::1 at 2019-11-05 16:46:43 -0600
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 23ms (Views: 22.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2019-11-05 16:46:50 -0600
+Processing by RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 47ms (Views: 46.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2019-11-05 16:47:08 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jH2yuVSAcFZ5+R3XQuIDVGSnq0aOFC/dWrgXGxwDoby7I+ks/wdsPHziYVxt8GukgyU5lFzFpXAG5jobpgV48A==", "user"=>{"email"=>"johndoe@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "payment"=>{"card_expires_month"=>"7", "card_expires_year"=>"2024", "token"=>"tok_1FbanoKcq08y3n4bUsdkxz3l"}}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "johndoe@example.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "confirmation_token", "confirmation_sent_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "johndoe@example.com"], ["encrypted_password", "$2a$11$N4ou/2FgW5FZ9uPyYMOJBuw1WVsqIqDLiExxjiG.C20b5BtwmFCMq"], ["confirmation_token", "YrL47x5U3eBjPWnstw2U"], ["confirmation_sent_at", "2019-11-05 22:47:08.752195"], ["created_at", "2019-11-05 22:47:08.752141"], ["updated_at", "2019-11-05 22:47:08.752141"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "payments" ("email", "token", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "johndoe@example.com"], ["token", "tok_1FbanoKcq08y3n4bUsdkxz3l"], ["user_id", 27], ["created_at", "2019-11-05 22:47:11.119044"], ["updated_at", "2019-11-05 22:47:11.119044"]]
+Redirected to http://localhost:3001/
+  [1m[35m (5.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb
+  Rendered /home/srlane/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/devise-4.7.1/app/views/devise/mailer/confirmation_instructions.html.erb (0.4ms)
+Devise::Mailer#confirmation_instructions: processed outbound mail in 9.2ms
+Sent mail to johndoe@example.com (1.8ms)
+Date: Tue, 05 Nov 2019 16:47:11 -0600
+From: please-change-me-at-config-initializers-devise@example.com
+Reply-To: please-change-me-at-config-initializers-devise@example.com
+To: johndoe@example.com
+Message-ID: <5dc1fbef2205f_12782ac82045d5cc9816b@siren02.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome johndoe@example.com!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3001/users/confirmation?confirmation_token=YrL47x5U3eBjPWnstw2U">Confirm my account</a></p>
+
+Completed 302 Found in 2486ms (ActiveRecord: 5.6ms)
+
+
+Started GET "/" for ::1 at 2019-11-05 16:47:11 -0600
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 59ms (Views: 58.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation?confirmation_token=YrL47x5U3eBjPWnstw2U" for ::1 at 2019-11-05 16:47:29 -0600
+Processing by Devise::ConfirmationsController#show as HTML
+  Parameters: {"confirmation_token"=>"YrL47x5U3eBjPWnstw2U"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."confirmation_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["confirmation_token", "YrL47x5U3eBjPWnstw2U"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "users" SET "confirmed_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["confirmed_at", "2019-11-05 22:47:29.654481"], ["updated_at", "2019-11-05 22:47:29.654843"], ["id", 27]]
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3001/users/sign_in
+Completed 302 Found in 9ms (ActiveRecord: 3.6ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2019-11-05 16:47:29 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 32ms (Views: 31.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation?confirmation_token=Wz2JyE4xPms8v7AKf5AD" for ::1 at 2019-11-05 16:48:01 -0600
+Processing by Devise::ConfirmationsController#show as HTML
+  Parameters: {"confirmation_token"=>"Wz2JyE4xPms8v7AKf5AD"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."confirmation_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["confirmation_token", "Wz2JyE4xPms8v7AKf5AD"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "users" SET "confirmed_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["confirmed_at", "2019-11-05 22:48:01.485563"], ["updated_at", "2019-11-05 22:48:01.486496"], ["id", 26]]
+  [1m[35m (3.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3001/users/sign_in
+Completed 302 Found in 14ms (ActiveRecord: 5.3ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2019-11-05 16:48:01 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 33ms (Views: 31.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2019-11-05 16:48:15 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GT7Ua4nmcYujtiXvjtjt4GRBrGrbq07FzrszRKIJYGUuYI/+ImFt4aatWWShyoUQg8M+uAl6xGiS5R5EGA+5KQ==", "user"=>{"email"=>"janedoe@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "janedoe@example.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3001/
+Completed 302 Found in 105ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for ::1 at 2019-11-05 16:48:15 -0600
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 26], ["LIMIT", 1]]
+  Rendered welcome/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 26ms (Views: 25.7ms | ActiveRecord: 0.1ms)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2019-11-05 16:48:17 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"05GsQSTyorx0grxIdnH/ZtMXSUstU7gBWcNbqUwwhMWkmnKShfuv3WEIdVOAIIuuI7WVepvaK8tXLm6TLTkfVw=="}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 26], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3001/
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for ::1 at 2019-11-05 16:48:17 -0600
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 48ms (Views: 47.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2019-11-05 16:48:19 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 27ms (Views: 26.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2019-11-05 16:48:24 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TAbCRGE1DJXCtECB4KHPn8IgtI3ymI1920M1B0XJ2Ym3Si+1sbYboJZZpBJE8WeqFSLOUy8BJpoljh0PuJyV0g==", "user"=>{"email"=>"johndoe@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "johndoe@example.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3001/
+Completed 302 Found in 128ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for ::1 at 2019-11-05 16:48:24 -0600
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  Rendered welcome/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 24ms (Views: 24.0ms | ActiveRecord: 0.1ms)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2019-11-05 16:48:25 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"3dt+rfsxZjteqnTaQLJ2klcVIU3UkmBOPRNBKGcwBWhLf4V5PTNGOqVKuzsUxEVvs7L/zBcji2rV3QRB80nW1Q=="}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3001/
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-11-05 16:48:25 -0600
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 28ms (Views: 27.6ms | ActiveRecord: 0.0ms)
+
+
